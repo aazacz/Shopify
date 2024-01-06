@@ -1,13 +1,11 @@
-import react,{ useState } from "react";
+import React from "react";
 import "./App.css";
 import Router from "./Routes/Router";
 
 function App() {
-  
-
   return (
     <>
-     <Router/>
+      <Router />
     </>
   );
 }

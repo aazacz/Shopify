@@ -1,22 +1,60 @@
 export const list = [
   {
-    li: "Home",
-    link: "#Home",
+    li: "All",
+    link: "#All",
   },
   {
-    li: "About",
-    link: "#About",
+    li: "Clothes",
+    link: "#Clothes",
   },
   {
-    li: "Skills",
-    link: "#Skills",
+    li: "Electronics",
+    link: "#Electronics",
   },
   {
-    li: "Projects",
-    link: "#Projects",
+    li: "Furniture",
+    link: "#Furniture",
   },
   {
-    li: "Contact",
-    link: "#Contact",
+    li: "Toys",
+    link: "#Toys",
   },
 ];
+
+
+
+
+
+import { MdAccountBalance } from "react-icons/md";
+import { RiAccountCircleFill } from "react-icons/ri";
+import { FaBasketShopping } from "react-icons/fa6";
+import { FaShoppingCart } from "react-icons/fa";
+
+
+
+export const navpopup = [
+    {
+      header: "User",
+      icons: MdAccountBalance,
+      screen:"block md:hidden"
+    },
+    {
+      header: "My Orders",
+      icons: FaBasketShopping,
+      screen:"block md:hidden"
+    },
+    {
+      header: "My Accounts",
+      icons: RiAccountCircleFill,
+      screen:"block md:hidden"
+    },
+    {
+      header: " ",
+      icons: FaShoppingCart,
+      screen:"block"
+    },
+   
+   
+  ];
+  
+
