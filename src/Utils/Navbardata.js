@@ -48,11 +48,11 @@ export const navpopup = [
       icons: RiAccountCircleFill,
       screen:"block md:hidden"
     },
-    {
-      header: " ",
-      icons: FaShoppingCart,
-      screen:"block"
-    },
+    // {
+    //   header: " ",
+    //   icons: FaShoppingCart,
+    //   screen:"block"
+    // },
    
    
   ];

@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import Axios from 'axios'
-import { BsPlusCircleDotted, BsPlusCircleFill } from "react-icons/bs";
+import {  BsPlusCircleFill } from "react-icons/bs";
 import { TiTick } from "react-icons/ti";
-
+import { addedItemsContext } from '../Pages/Home'; 
 const Body = () => {
 
     const [products, setproducts] = useState([])
     const [searchValue, setSearchValue] = useState("");
     const [isAdded, setIsAdded] = useState(true);
-    const [addedItems, setAddedItem] = useState([]);
+    // const [addedItems, setAddedItem] = useState([]);
+    
+    const addedItemscontext = useContext(addedItemsContext);
+    const{cartItems,setcartItems} = addedItemscontext
 
     // Fetch all products from the server when component mounts.
     useEffect(() => {
@@ -24,16 +27,7 @@ const Body = () => {
         .catch((error) => { console.log(error) })
     }, [])
 
-    // useEffect(() => {
-    //  console.log("addedItems" + addedItems);
-    // }, [addedItems])
-
-    const item = addedItems.filter((addedItem) => addedItem.id == products.id);
-   
-    useEffect(() => {
-      item.length == 0 ? setIsAdded(true) : setIsAdded(false);
-    }, [item]);
-
+  
     //function for filtering items
     const itmesFilter = products.filter((item) =>
          item.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -43,19 +37,19 @@ const Body = () => {
   function addItem(item) {
     console.log("add item clicked");
     item.addNumber = 1;
-    const itemArr = addedItems;
-    setAddedItem([...itemArr, item]);
-    console.log("addedItems" + addedItems)
+    const itemArr = cartItems;
+    setcartItems([...itemArr, item]);
+    console.log("addedItems" + cartItems)
   } 
   //function to remove item
   function removeItem(item) {
     console.log("remove  item clicked");
-    const newItems = addedItems.filter((addedItem) => addedItem.id !== item.id);
-    setAddedItem(newItems);
+    const newItems = cartItems.filter((addedItem) => addedItem.id !== item.id);
+    setcartItems(newItems);
     // console.log(addedItems);
   }
  function checkProduct(item) {
-    const foundItem  = addedItems.filter((addedItem) => addedItem.id == item.id);
+    const foundItem  = cartItems.filter((addedItem) => addedItem.id == item.id);
   if(foundItem.length == 0){
     return true
   }

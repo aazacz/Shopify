@@ -1,14 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { list, navpopup } from "../Utils/Navbardata";
 import { Link } from "react-router-dom";
 import { IoReorderThree } from "react-icons/io5";
+import { FaShoppingCart } from "react-icons/fa";
 import "../App.css"
-const Navbar = () => {
-  const [cartItems, setCartitems] = useState([]);
-  const [NavPopOpen, setNavPopOpen] = useState(false)
+import Minicart from "./Minicart";
+import { addedItemsContext } from '../Pages/Home'; 
 
-  
+const Navbar = () => {
+
+  const [NavPopOpen, setNavPopOpen] = useState(false)
+  const [MinicartOpen,setMinicartOpen] = useState(false)
+ 
+  const addedItemscontext = useContext(addedItemsContext);
+  const{cartItems,setcartItems} = addedItemscontext
   return (
+    <>
     <div className={`z-50 h-20 w-full  justify-between shadow-fineline relative md:sticky  bg-white md:top-0  md:flex md:h-[70px] md:w-full`} >
       <div className="text:black  flex  h-full   md:px-9  md:w-auto  ">
         <ul className="flex w-full items-center gap-x-3 px-4 " >
@@ -44,8 +51,10 @@ const Navbar = () => {
                 </>
               )
             })}
-
-            {/* <span className=""> <FaShoppingCart /> </span> */}
+          <span className="flex gap-x-2 items-center md:flex  md:w-auto hover:bg-cyan-200 md:hover:bg-inherit  px-3 py-1 ">
+          <span className=""> <FaShoppingCart  onClick={()=>setMinicartOpen((currentstate)=>!currentstate)}/> </span>
+          </span>
+            
             <span className={`${cartItems.length > 0 ? "" : "hidden"} text-red-600`} >
               {cartItems.length ? cartItems.length : ""}
             </span>
@@ -54,6 +63,8 @@ const Navbar = () => {
         </div>}
 
     </div>
+    {MinicartOpen && <Minicart/>}
+    </>
   );
 };
 
