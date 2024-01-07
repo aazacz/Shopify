@@ -1,15 +1,16 @@
-// CheckoutPage.jsx
-
 import React,{useContext} from 'react';
 import { addedItemsContext } from '../Pages/Home';
-
-
+import toast from 'react-hot-toast';
+import { MyOrderContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 const CheckoutPage = () => {
+    const navigate = useNavigate()
     const addedItemscontext = useContext(addedItemsContext);
     const { cartItems, setcartItems } = addedItemscontext
 
 
-
+    const myOrderContext = useContext(MyOrderContext)
+    const {MyOrder, setMyOrder} = myOrderContext
 
   const calculateTotal = () => {
     return cartItems.reduce((total, item) => {
@@ -17,6 +18,16 @@ const CheckoutPage = () => {
     }, 0);
   };
 
+  const HandleCheckout=()=>{
+
+console.log("Checkout started");
+    if(cartItems.length>0){
+        setMyOrder(cartItems)
+        toast.success("Your Order Has Been Success")
+        navigate('/',{replace:true})
+    }
+   
+  }
   return (
     <div className="container mx-auto mt-10">
       <div className="flex justify-center">
@@ -45,6 +56,11 @@ const CheckoutPage = () => {
             {/* For simplicity, let's skip those details in this example */}
           </div>
         </div>
+      </div>
+      <div className='w-fuil h-11 flex items-center justify-center'>
+
+       <button type='button' className='w-auto px-7 py-2 bg-red-700 text-white rounded-2xl' 
+       onClick={()=>HandleCheckout()}> Finish</button>
       </div>
     </div>
   );

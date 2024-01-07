@@ -17,8 +17,7 @@ function reducer(state, action) {
           })
         
           return updatedState;
-       
-      
+            
     } else if (action.type === "DECREASE") {
       if (state.addNumber == 1) {
          return state

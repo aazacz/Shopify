@@ -1,16 +1,18 @@
-import React from 'react'
+import React,{useContext} from 'react';
+import { MyOrderContext } from '../App';
 
 const Orders = () => {
-  const orders = [
-    { id: 1, product: 'Product A', quantity: 2, price: 30 },
-    { id: 2, product: 'Product B', quantity: 1, price: 25 },
-    { id: 3, product: 'Product C', quantity: 3, price: 15 },
-  ];
+  
+
+  const myOrderContext = useContext(MyOrderContext)
+  const {MyOrder, setMyOrder} = myOrderContext
+
+
   return (
     <div className="container mx-auto mt-8">
       <h2 className="text-2xl font-bold mb-4">My Orders</h2>
       
-      {orders.length === 0 ? (
+      {MyOrder.length === 0 ? (
         <p className="text-gray-600">No orders available.</p>
       ) : (
         <table className="min-w-full divide-y divide-gray-200">
@@ -28,29 +30,24 @@ const Orders = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {orders.map(order => (
-              <tr key={order.id}>
+            {MyOrder.map(item => (
+              <tr key={item.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">{order.product}</div>
+                  <div className="text-sm font-medium text-gray-900">{item.title}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{order.quantity}</div>
+                  <div className="text-sm text-gray-500">{item.addNumber}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">${order.price}</div>
+                  <div className="text-sm text-gray-500">${item.price}</div>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       )}
-
-{/* <div className='w-full h-auto flex items-center justify-center'>
-
-      <button type='' className='w-auto px-8 bg-red-700 rounded-xl text-white py-2'>CheckOut</button>
-</div> */}
     </div>
-  )
-}
+  );
+};
 
-export default Orders
+export default Orders;
