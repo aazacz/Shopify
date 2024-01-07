@@ -29,9 +29,7 @@ const Navbar = () => {
   const HandleSignout=()=>{
    
     signOut(auth)
-    .then((value)=>{
-           setUser((prevUser)=>{ (  {...prevUser, name:"",email:"",password:""} )   })
-          })
+    .then((value)=>{  setUser((prevUser)=>{ (  {...prevUser, name:"",email:"",password:""}) })  })
     .then(()=>navigate('/'))
     .catch((error)=>toast.error(error.message))
   }

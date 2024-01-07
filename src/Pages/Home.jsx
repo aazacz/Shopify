@@ -9,10 +9,10 @@ export const filteredContext  = createContext();
 
 
 const Home = () => {
-  const [cartItems, setcartItems] = useState([])
+  const [cartItems, setcartItems] = useState([]);
   const [cartopen,setcartopen] =useState(false)
-  const [filtered, setfiltered] = useState([])
-
+  const [filtered, setfiltered] = useState([]);
+  
   return (
     <>
     {/* <filteredContext.Provider value={{filtered, setfiltered}}> */}

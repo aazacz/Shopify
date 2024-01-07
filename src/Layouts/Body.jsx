@@ -3,17 +3,17 @@ import Axios from 'axios'
 import {  BsPlusCircleFill } from "react-icons/bs";
 import { TiTick } from "react-icons/ti";
 import { addedItemsContext } from '../Pages/Home'; 
-
-
 const Body = () => {
 
     const [products, setproducts] = useState([])
     const [searchValue, setSearchValue] = useState("");
     const [filtered, setfiltered] = useState([]);
+    // const [addedItems, setAddedItem] = useState([]);
     
     const addedItemscontext = useContext(addedItemsContext);
     const{cartItems,setcartItems} = addedItemscontext
 
+    // Fetch all products from the server when component mounts.
     useEffect(() => {
         Axios.get("https://api.escuelajs.co/api/v1/products")
         .then((Response) =>  Response.data)
@@ -22,11 +22,10 @@ const Body = () => {
                ...product,   isAdded: true, }))
 
              setproducts(productsWithAddedFlag);
+            // console.log(productsWithAddedFlag);
         })
-        .catch((error) => {
-             console.log(error) 
-                         })
-
+        .catch((error) => { console.log(error) })
+        
     }, [])
 
   
@@ -34,15 +33,8 @@ const Body = () => {
     const itmesFilter = products.filter((item) =>
          item.title.toLowerCase().includes(searchValue.toLowerCase())
   );
-//   setfiltered(itmesFilter)
   
-  const categoryfilter=(val)=>{
   
-    const itmesFilter = products.filter((item)=>{
-                        item.title.toLowerCase()
-                        .includes(searchValue.toLowerCase())   })
-    setfiltered()
-  }
 
   //function to add item
   function addItem(item) {
@@ -50,13 +42,14 @@ const Body = () => {
     item.addNumber = 1;
     const itemArr = cartItems;
     setcartItems([...itemArr, item]);
-  
+    console.log("addedItems" + cartItems)
   } 
   //function to remove item
   function removeItem(item) {
     console.log("remove  item clicked");
     const newItems = cartItems.filter((addedItem) => addedItem.id !== item.id);
     setcartItems(newItems);
+    // console.log(addedItems);
   }
  function checkProduct(item) {
     const foundItem  = cartItems.filter((addedItem) => addedItem.id == item.id);
